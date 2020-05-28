@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ConnectDatabaseException;
 use App\Models\User;
 use App\Response\ResponseHandler;
 use App\Http\Request\Request;
@@ -32,8 +31,16 @@ class AccountController
         try {
             $data = $this->request->getDataOfMethodPost();
             // check validate
+            $data['password'] = hash('sha256', $data['email'] . $data['password']);
 
-            echo $this->successResponse($this->user->getAccount($data['email'], $data['password']));
+            if ($user = $this->user->getAccount($data['email'], $data['password'])) {
+                return $this->successResponse($user);
+            }
+            return $this->errorResponse([
+                'errors' => [
+                    'authen' => ['Thông tin đăng nhập không chính xác.']
+                ]
+            ]);
         } catch (\Exception $e) {
             echo $this->serviceErrorResponse();
         }
@@ -41,22 +48,7 @@ class AccountController
 
     public function logout()
     {
-        echo 'logout';
-    }
-
-    public function profile()
-    {
-        echo 'profile';
-    }
-
-    public function update()
-    {
-        echo 'update';
-    }
-
-    public function register()
-    {
-        echo 'register';
+        return 'logout';
     }
 
 }

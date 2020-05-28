@@ -5,8 +5,7 @@
  */
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-
-$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . '/..');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 
 try {
@@ -14,7 +13,8 @@ try {
 
     $router->add('/login', ['controller' => 'AccountController', 'action' => 'login']);
     $router->add('/logout', ['controller' => 'AccountController', 'action' => 'logout']);
-    //    $router->add('/me/update', ['controller' => 'AccountController', 'action' => 'update']);
+    $router->add('/profile', ['controller' => 'UserController', 'action' => 'profile']);
+    $router->add('/me/update', ['controller' => 'UserController', 'action' => 'update']);
 
     $router->dispatch($_SERVER['PATH_INFO']);
 } catch (\App\Exceptions\ConnectDatabaseException $e) {

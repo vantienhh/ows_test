@@ -33,3 +33,16 @@ cp .env.example .env
 ```
 composer install
 ```
+
+3/ import database
+
+## API
+1/ url: http://localhost/public/index.php
+
+2/ tài khoản:
+
+email : "tienhh1994@gmail.com"
+
+pass: "admin"
+    
+

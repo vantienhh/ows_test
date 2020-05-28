@@ -21,4 +21,14 @@ trait ResponseHandler
             'message' => $message or 'Internal Server Error'
         ]);
     }
+
+    protected function errorResponse($data)
+    {
+        return json_encode([
+            'code'    => 422,
+            'status'  => 'error',
+            'data'    => $data,
+            'message' => 'Unprocessable Entity'
+        ]);
+    }
 }
