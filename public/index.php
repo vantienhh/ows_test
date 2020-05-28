@@ -5,6 +5,10 @@
  */
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+
+$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ . '/..');
+$dotenv->load();
+
 try {
     $router = new Core\Router();
 
@@ -15,8 +19,8 @@ try {
     $router->dispatch($_SERVER['PATH_INFO']);
 } catch (\App\Exceptions\ConnectDatabaseException $e) {
     echo json_encode([
-        'code'   => 500,
-        'status' => 'error',
+        'code'    => 500,
+        'status'  => 'error',
         'message' => $e->getMessage()
     ]);
 } catch (\Exception $e) {
