@@ -37,7 +37,12 @@ composer install
 3/ import database
 
 ## API
-1/ url: http://localhost/public/index.php
+1/ list api:
+- [POST] http://localhost/public/index.php/login
+- [GET] http://localhost/public/index.php/logout
+- [GET] http://localhost/public/index.php/profile
+- [PUT] http://localhost/public/index.php/me/update
+
 
 2/ tài khoản:
 

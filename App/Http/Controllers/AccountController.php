@@ -51,7 +51,7 @@ class AccountController
                 if ($user = $this->user->getAccount($data['email'], $password)) {
                     $accessToken = JWT::encode($data);
 
-                    $this->token->findAndNew([
+                    $this->token->store([
                         'user_id' => $user['id'],
                         'token'   => $accessToken
                     ]);

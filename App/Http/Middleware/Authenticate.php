@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Exceptions\UnauthorizedException;
 use App\Models\Token;
 use App\Models\User;
+use App\Oauth\JWT;
 
 class Authenticate
 {
@@ -22,7 +23,7 @@ class Authenticate
         $this->authenticate();
     }
 
-    public function checkAuthorization()
+    public function issetAuthorization()
     {
         $headers = apache_request_headers();
 
@@ -35,11 +36,11 @@ class Authenticate
 
     public function authenticate()
     {
-        $this->checkAuthorization();
+        $this->issetAuthorization();
         $token = $this->getToken();
 
-        if ($token = $this->token->findByToken($token)) {
-            $this->user = (new User())->getById($token['user_id']);
+        if ($objToken = $this->token->findByToken($token)) {
+            $this->user = (new User())->getById($objToken['user_id']);
         } else {
             throw new UnauthorizedException();
         }

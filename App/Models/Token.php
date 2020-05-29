@@ -9,25 +9,25 @@ class Token extends Model
 {
     public $table = 'tokens';
 
-    public function findAndNew(array $data)
-    {
-        if (!$this->findByUserAndToken($data)) {
-            $this->store($data);
-        }
-    }
+//    public function findAndNew(array $data)
+//    {
+//        if (!$this->findByUserAndToken($data)) {
+//            $this->store($data);
+//        }
+//    }
 
-    public function findByUserAndToken(array $data)
-    {
-        $query = $this->db
-            ->prepare("SELECT * FROM " . $this->table . " WHERE user_id = :user_id AND token = :token LIMIT 1");
-
-        $query->execute(array(
-            ':user_id' => $data['user_id'],
-            ':token'   => $data['token']
-        ));
-
-        return $query->fetch(PDO::FETCH_ASSOC);
-    }
+//    public function findByUserAndToken(array $data)
+//    {
+//        $query = $this->db
+//            ->prepare("SELECT * FROM " . $this->table . " WHERE user_id = :user_id AND token = :token LIMIT 1");
+//
+//        $query->execute(array(
+//            ':user_id' => $data['user_id'],
+//            ':token'   => $data['token']
+//        ));
+//
+//        return $query->fetch(PDO::FETCH_ASSOC);
+//    }
 
     public function findByToken($token)
     {
