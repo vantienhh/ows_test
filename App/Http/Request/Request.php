@@ -15,6 +15,11 @@ class Request
         return $this->method;
     }
 
+    public function isMethodPost(): bool
+    {
+        return $this->getMethod() === 'POST';
+    }
+
     public function getDataOfMethodPost(): array
     {
         return json_decode(file_get_contents('php://input'), true);

@@ -2,4 +2,6 @@
 
 namespace App\Exceptions;
 
-class ConnectDatabaseException extends \Exception {}
+class ConnectDatabaseException extends \Exception
+{
+}

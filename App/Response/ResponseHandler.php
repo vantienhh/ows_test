@@ -13,12 +13,21 @@ trait ResponseHandler
         ]);
     }
 
-    protected function serviceErrorResponse($message = null)
+    protected function unauthorizedResponse()
     {
         return json_encode([
-            'code'   => 500,
-            'status' => 'error',
-            'message' => $message or 'Internal Server Error'
+            'code'    => 401,
+            'status'  => 'error',
+            'message' => 'Unauthorized'
+        ]);
+    }
+
+    protected function methodNotAllowResponse()
+    {
+        return json_encode([
+            'code'    => 405,
+            'status'  => 'error',
+            'message' => 'Method Not Allowed'
         ]);
     }
 
@@ -29,6 +38,15 @@ trait ResponseHandler
             'status'  => 'error',
             'data'    => $data,
             'message' => 'Unprocessable Entity'
+        ]);
+    }
+
+    protected function serviceErrorResponse($message = null)
+    {
+        return json_encode([
+            'code'    => 500,
+            'status'  => 'error',
+            'message' => $message ?? 'Internal Server Error'
         ]);
     }
 }
