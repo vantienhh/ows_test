@@ -3,6 +3,9 @@
 /**
  * Composer
  */
+
+use App\Exceptions\NoRouteException;
+
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
@@ -23,6 +26,16 @@ try {
         'status'  => 'error',
         'message' => $e->getMessage()
     ]);
+} catch (NoRouteException $e) {
+    echo json_encode([
+        'code'    => 404,
+        'status'  => 'not found',
+        'message' => $e->getMessage()
+    ]);
 } catch (\Exception $e) {
-    echo $e;
+    echo json_encode([
+        'code'    => 500,
+        'status'  => 'error',
+        'message' => $e->getMessage()
+    ]);
 }

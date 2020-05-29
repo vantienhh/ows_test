@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Exceptions\NoRouteException;
+
 class Router
 {
 
@@ -122,7 +124,7 @@ class Router
                 throw new \Exception("Controller class $controller not found");
             }
         } else {
-            throw new \Exception('No route matched.', 404);
+            throw new NoRouteException('No route matched.');
         }
     }
 
