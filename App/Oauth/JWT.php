@@ -23,14 +23,4 @@ class JWT
         return $encodeHeader . '.' . $encodePayload . '.' . $encodeSignature;
     }
 
-    public static function decode(string $jwt)
-    {
-//        $encodePayload   = base64_encode(json_encode(array_merge(
-//            ['iss' => 'tien'],
-//            $payload
-//        )));
-        $encodeHeader    = base64_encode(json_encode(self::HEADER));
-        $decodeSignature = base64_encode(base64_decode($_ENV['JWT_SIGNATURE']));
-        die;
-    }
 }

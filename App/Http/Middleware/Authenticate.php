@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Exceptions\UnauthorizedException;
 use App\Models\Token;
+use App\Models\User;
 
 class Authenticate
 {
@@ -18,7 +19,7 @@ class Authenticate
     public function __construct()
     {
         $this->token = new Token();
-        $this->checkAuthorization();
+        $this->authenticate();
     }
 
     public function checkAuthorization()
@@ -34,10 +35,11 @@ class Authenticate
 
     public function authenticate()
     {
+        $this->checkAuthorization();
         $token = $this->getToken();
 
-        if ($user = $this->token->findByToken($token)) {
-            $this->user = $user;
+        if ($token = $this->token->findByToken($token)) {
+            $this->user = (new User())->getById($token['user_id']);
         } else {
             throw new UnauthorizedException();
         }
@@ -45,9 +47,6 @@ class Authenticate
 
     public function user()
     {
-        if (!$this->user) {
-            $this->authenticate();
-        }
         return $this->user;
     }
 

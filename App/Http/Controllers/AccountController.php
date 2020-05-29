@@ -45,7 +45,7 @@ class AccountController
                 // check validate
                 Validate::validateLogin($this->request);
 
-                $data     = $this->request->getDataOfMethodPost();
+                $data     = $this->request->getDataRequest();
                 $password = hash('sha256', $data['email'] . $data['password']);
 
                 if ($user = $this->user->getAccount($data['email'], $password)) {
@@ -80,7 +80,6 @@ class AccountController
     {
         try {
             $authenicate = new Authenticate();
-            $authenicate->authenticate();
 
             $this->token->delete($authenicate->getToken(), $authenicate->user()['id']);
             return $this->successResponse([]);

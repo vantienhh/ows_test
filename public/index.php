@@ -14,7 +14,7 @@ try {
     $router->add('/login', ['controller' => 'AccountController', 'action' => 'login']);
     $router->add('/logout', ['controller' => 'AccountController', 'action' => 'logout']);
     $router->add('/profile', ['controller' => 'UserController', 'action' => 'profile']);
-    $router->add('/me/update', ['controller' => 'UserController', 'action' => 'update']);
+    $router->add('/me/update', ['controller' => 'UserController', 'action' => 'updateProfile']);
 
     $router->dispatch($_SERVER['PATH_INFO']);
 } catch (\App\Exceptions\ConnectDatabaseException $e) {

@@ -20,7 +20,12 @@ class Request
         return $this->getMethod() === 'POST';
     }
 
-    public function getDataOfMethodPost(): array
+    public function isMethodPUT(): bool
+    {
+        return $this->getMethod() === 'PUT';
+    }
+
+    public function getDataRequest(): array
     {
         return json_decode(file_get_contents('php://input'), true);
     }
